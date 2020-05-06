@@ -1,5 +1,5 @@
 from room import Room
-
+from player import Player
 # Declare all the rooms
 
 room = {
@@ -49,3 +49,42 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+player = Player('Josh', room['outside'])
+
+userInput = ''
+
+#logic for switching rooms based odn direction entered
+def movetoRoom(direction):
+    currentRoom = str(player.getRoom()).split(',')
+    if(currentRoom[0].lower() == 'outside cave entrance' and direction.lower() == 'n'):
+        player.setRoom(room['outside'].n_to)
+
+    if(currentRoom[0].lower() == 'foyer' and direction.lower() == 's'):
+        player.setRoom(room['foyer'].s_to)
+    
+    if(currentRoom[0].lower() == 'foyer' and direction.lower() == 'n'):
+        player.setRoom(room['foyer'].n_to)
+    
+    if(currentRoom[0].lower() == 'foyer' and direction.lower() == 'e'):
+        player.setRoom(room['foyer'].e_to)
+
+    if(currentRoom[0].lower() == 'grand overlook' and direction.lower() == 's'):
+        player.setRoom(room['overlook'].s_to)
+    
+    if(currentRoom[0].lower() == 'narrow passage' and direction.lower() == 'w'):
+        player.setRoom(room['narrow'].w_to)
+
+    if(currentRoom[0].lower() == 'narrow passage' and direction.lower() == 'n'):
+        player.setRoom(room['narrow'].n_to)
+    
+    if(currentRoom[0].lower() == 'treasure chamber' and direction.lower() == 's'):
+        player.setRoom(room['treasure'].s_to)
+
+#main game loop
+while userInput != 'q':
+    print(player)
+    userInput = input('which direction would you like to go?: ')
+    if(userInput == 'q'):
+        break
+    else:
+        movetoRoom(userInput)
