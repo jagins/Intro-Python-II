@@ -55,7 +55,7 @@ player = Player(playerName, room['outside'])
 
 userInput = ''
 
-#logic for switching rooms based odn direction entered
+#logic for switching rooms based on direction entered
 def movetoRoom(direction):
     currentRoom = str(player.getRoom()).split(',')
     if(currentRoom[0].lower() == 'outside cave entrance' and direction.lower() == 'n'):
