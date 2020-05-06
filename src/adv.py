@@ -50,12 +50,8 @@ room['treasure'].s_to = room['narrow']
 #
 # If the user enters "q", quit the game.
 
-playerName = input('Please enter the name of your character: ')
-player = Player(playerName, room['outside'])
-userInput = ''
-
 #logic for switching rooms based on direction entered
-def movetoRoom(direction):
+def movetoRoom(direction, player):
     currentRoom = str(player.getRoom()).split(',')
     if(currentRoom[0].lower() == 'outside cave entrance' and direction.lower() == 'n'):
         player.setRoom(room['outside'].n_to)
@@ -81,11 +77,20 @@ def movetoRoom(direction):
     if(currentRoom[0].lower() == 'treasure chamber' and direction.lower() == 's'):
         player.setRoom(room['treasure'].s_to)
 
-#main game loop
-while userInput != 'q':
-    print(player)
-    userInput = input('which direction would you like to go?: ')
-    if(userInput == 'q'):
-        break
-    else:
-        movetoRoom(userInput)
+
+def main():
+    playerName = input('Please enter the name of your character: ')
+    player = Player(playerName, room['outside'])
+    userInput = ''
+    #main game loop
+    while userInput != 'q':
+        print(player)
+        userInput = input('which direction would you like to go?: ')
+        if(userInput == 'q'):
+            break
+        else:
+            movetoRoom(userInput, player)
+
+
+if __name__ == "__main__":
+    main()
