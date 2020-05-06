@@ -49,7 +49,9 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-player = Player('Josh', room['outside'])
+
+playerName = input('Please enter the name of your character: ')
+player = Player(playerName, room['outside'])
 
 userInput = ''
 
