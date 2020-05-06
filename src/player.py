@@ -3,14 +3,17 @@
 #
 class Player:
     def __init__(self, name, currentRoom):
-        self.name = name
-        self.currentRoom = currentRoom
+        self.__name = name
+        self.__currentRoom = currentRoom
+
+    def getName(self):
+        return self.__name
     
     def getRoom(self):
-        return self.currentRoom
+        return self.__currentRoom
 
     def setRoom(self, room):
-        self.currentRoom = room
+        self.__currentRoom = room
     
     def __str__(self):
-        return f'{self.name} is in {self.currentRoom}'
+        return f'{self.__name} is in {self.__currentRoom}'

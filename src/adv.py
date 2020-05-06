@@ -52,7 +52,6 @@ room['treasure'].s_to = room['narrow']
 
 playerName = input('Please enter the name of your character: ')
 player = Player(playerName, room['outside'])
-
 userInput = ''
 
 #logic for switching rooms based on direction entered
