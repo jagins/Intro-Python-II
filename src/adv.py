@@ -102,7 +102,7 @@ def main():
                 player.dropItem(userInput[1])
                 print('Item has been dropped ' + str(player.getItems()))
             
-            #movetoRoom(userInput[0], player)
+            movetoRoom(userInput[0], player)
 
 
 if __name__ == "__main__":
