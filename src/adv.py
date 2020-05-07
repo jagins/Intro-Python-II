@@ -1,10 +1,11 @@
 from room import Room
-
+from player import Player
+from item import Item
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", Item('Lantern')),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -49,3 +50,60 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+#logic for switching rooms based on direction entered
+def movetoRoom(direction, player):
+    currentRoom = str(player.getRoom()).split(',')
+    if(currentRoom[0].lower() == 'outside cave entrance' and direction.lower() == 'n'):
+        player.setRoom(room['outside'].n_to)
+
+    if(currentRoom[0].lower() == 'foyer' and direction.lower() == 's'):
+        player.setRoom(room['foyer'].s_to)
+    
+    if(currentRoom[0].lower() == 'foyer' and direction.lower() == 'n'):
+        player.setRoom(room['foyer'].n_to)
+    
+    if(currentRoom[0].lower() == 'foyer' and direction.lower() == 'e'):
+        player.setRoom(room['foyer'].e_to)
+
+    if(currentRoom[0].lower() == 'grand overlook' and direction.lower() == 's'):
+        player.setRoom(room['overlook'].s_to)
+    
+    if(currentRoom[0].lower() == 'narrow passage' and direction.lower() == 'w'):
+        player.setRoom(room['narrow'].w_to)
+
+    if(currentRoom[0].lower() == 'narrow passage' and direction.lower() == 'n'):
+        player.setRoom(room['narrow'].n_to)
+    
+    if(currentRoom[0].lower() == 'treasure chamber' and direction.lower() == 's'):
+        player.setRoom(room['treasure'].s_to)
+
+
+def main():
+    playerName = input('Please enter the name of your character: ')
+    player = Player(playerName, room['outside'])
+    userInput = ''
+    #main game loop
+    while userInput != 'q':
+        print(player)
+        userInput = input('which direction would you like to to do?: ')
+        if(userInput == 'q'):
+            break
+        else:
+            userInput = userInput.split(' ')
+            if str(userInput[0]).lower() == 'pickup':
+                player.addItem(userInput[1])
+                if player.getErrorMessage != '':
+                    print('Item has been added ' + str(player.getItems()))
+                else:
+                    print(player.getErrorMessage())
+            
+            elif str(userInput[0].lower() == 'drop'):
+                player.dropItem(userInput[1])
+                print('Item has been dropped ' + str(player.getItems()))
+            
+            movetoRoom(userInput[0], player)
+
+
+if __name__ == "__main__":
+    main()
