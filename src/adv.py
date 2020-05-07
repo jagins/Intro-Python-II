@@ -1,10 +1,11 @@
 from room import Room
 from player import Player
+from item import Item
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", Item('Lantern')),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -85,11 +86,16 @@ def main():
     #main game loop
     while userInput != 'q':
         print(player)
-        userInput = input('which direction would you like to go?: ')
+        userInput = input('which direction would you like to to do?: ')
         if(userInput == 'q'):
             break
         else:
-            movetoRoom(userInput, player)
+            userInput = userInput.split(' ')
+            if str(userInput[0]).lower() == 'pickup':
+                player.addItem(userInput[1])
+                print('Item has been added ' + str(player.getItems()))
+            
+            movetoRoom(userInput[0], player)
 
 
 if __name__ == "__main__":

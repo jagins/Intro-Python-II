@@ -1,7 +1,6 @@
 # Write a class to hold player information, e.g. what room they are in
 # currently.
 #
-from item import Item
 
 class Player:
     def __init__(self, name, currentRoom, itemList = []):
@@ -20,14 +19,16 @@ class Player:
         self.__currentRoom = room
 
     def addItem(self, item):
-        if(self.__itemList < 2):
-            self.__itemList.append(Item(item))
+        if(len(self.__itemList) < 2):
+            self.__itemList.append(item)
         else:
             print('Inventory is full can only carry 2 items at a time')
     
     def dropItem(self, item):
         self.__itemList.remove(item)
 
+    def getItems(self):
+        return self.__itemList
     
     def __str__(self):
         return f'{self.__name} is in {self.__currentRoom}'
