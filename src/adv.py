@@ -93,9 +93,16 @@ def main():
             userInput = userInput.split(' ')
             if str(userInput[0]).lower() == 'pickup':
                 player.addItem(userInput[1])
-                print('Item has been added ' + str(player.getItems()))
+                if player.getErrorMessage != '':
+                    print('Item has been added ' + str(player.getItems()))
+                else:
+                    print(player.getErrorMessage())
             
-            movetoRoom(userInput[0], player)
+            elif str(userInput[0].lower() == 'drop'):
+                player.dropItem(userInput[1])
+                print('Item has been dropped ' + str(player.getItems()))
+            
+            #movetoRoom(userInput[0], player)
 
 
 if __name__ == "__main__":
